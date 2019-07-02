@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- <div class="text-center" id="loading">
+    <div id="inner-div-loading">
+        <div id="home-anim" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        <h4>Loading tweets...</h4>
+    </div>
+</div> -->
+
+
+<nav id="nav" class="navbar fixed-top navbar-expand-lg navbar-dark">
+	 <div class="collapse navbar-collapse flex-md-column" id="navbarCollapse">
+	 	<div class="container-fluid">
+	        <div class="row">
+	            <div class="col-sm-2">
+	                <a class="navbar-brand" href="/search">
+	                    Feed Me!
+	                </a>
+	            </div>
+	            <div class="col-sm-10">
+                    <form class="form-group-row form-inline" action="/search" method="POST" name="theForm">
+                        <div class="col-sm-8">
+                            <input type="text" id="query_input" name="query" class="form-control search_input" value="{{query}}" placeholder="Search emergency" width="100%"/>
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn btn-primary btn-lg" type="submit" id="load_button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+	            </div>
+    		</div>
+        	
+        </div>
+    </div>          
+ </nav>
+
+{% if tweets != '' %}
+<div class="container">
+    {{news}}
+</div>
+{% endif %}
+
+{% endblock content %}
