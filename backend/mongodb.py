@@ -51,7 +51,8 @@ class MongoCollection:
             self.collection=self.database[collectionname]
             return self
         else:
-            raise collectionException
+            # raise collectionException(e)
+            print("No such collection")
         
 
     def find_all(self):
