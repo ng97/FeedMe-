@@ -59,144 +59,160 @@ var paginationHandler = function(){
 
 $(document).ready(paginationHandler);
 
-$(document).ready(function() {
-    var active_categories = []
-    var active_priorities = []
-    var media_only = false
-    var chronological = true
-    paginationHandler
+// $(document).ready(function() {
+//     var active_categories = []
+//     var active_priorities = []
+//     var media_only = false
+//     var chronological = true
+//     paginationHandler
 
-    setTimeout(function() {
-        $('.alert').fadeOut();
-    }, 6000);
+//     setTimeout(function() {
+//         $('.alert').fadeOut();
+//     }, 6000);
     
 
-    $('#load_button').click(function(){
-        query= $('#query_input').val();
-        tweetnum= $('#tweet_num').val();
-        if(query == '' || tweetnum == ''){
-            if(query == '' ){
-                $('#query_input').focus();
-                $('#query_input').css("background-color", "red");
-            }
-            if(tweetnum == '' ){
-                $('#tweet_num').focus();
-                $('#tweet_num').css("background-color", "red");
-            }
+//     $('#load_button').click(function(){
+//         query= $('#query_input').val();
+//         tweetnum= $('#tweet_num').val();
+//         if(query == '' || tweetnum == ''){
+//             if(query == '' ){
+//                 $('#query_input').focus();
+//                 $('#query_input').css("background-color", "red");
+//             }
+//             if(tweetnum == '' ){
+//                 $('#tweet_num').focus();
+//                 $('#tweet_num').css("background-color", "red");
+//             }
             
-        }else{
-            $('#loading').show();
-            $('#query_input').prop('readonly', true);
-            $('#tweet_num').prop('readonly', true);
-            document.theForm.submit();
-        }
-    })
+//         }else{
+//             $('#loading').show();
+//             $('#query_input').prop('readonly', true);
+//             $('#tweet_num').prop('readonly', true);
+//             document.theForm.submit();
+//         }
+//     })
 
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
+//     $(function () {
+//         $('[data-toggle="tooltip"]').tooltip()
+//     })
 
-    $('.category-filters').children('label').each(function(i) {
-        if ($(this).hasClass('active')) {
-            active_categories.push($(this).attr('id'))
-        }
-    });
-    $('.filters').children('.filter').each(function(i) {
-        if ($(this).has('i')) {
-            active_priorities.push($(this).attr('id'))
-        }
-    });
+//     $('.category-filters').children('label').each(function(i) {
+//         if ($(this).hasClass('active')) {
+//             active_categories.push($(this).attr('id'))
+//         }
+//     });
+//     $('.filters').children('.filter').each(function(i) {
+//         if ($(this).has('i')) {
+//             active_priorities.push($(this).attr('id'))
+//         }
+//     });
 
-    $(document).on('click', '.category', function () {
-        var check_val = $.inArray($(this).attr('id'), active_categories)
-        if (check_val == -1) {
-            active_categories.push($(this).attr('id'))
-        } else {
-            active_categories.splice(check_val, 1)
-        }
+//     $(document).on('click', '.category', function () {
+//         var check_val = $.inArray($(this).attr('id'), active_categories)
+//         if (check_val == -1) {
+//             active_categories.push($(this).attr('id'))
+//         } else {
+//             active_categories.splice(check_val, 1)
+//         }
 
-        filterTweets(active_categories, active_priorities, chronological, media_only)
-    });
+//         filterTweets(active_categories, active_priorities, chronological, media_only)
+//     });
 
-    $(document).on('click', '.filter', function () {
-        var check_val = $.inArray($(this).attr('id'), active_priorities)
-        if (check_val == -1) {
-            active_priorities.push($(this).attr('id'))
-        } else {
-            active_priorities.splice(check_val, 1)
-        }
+//     $(document).on('click', '.filter', function () {
+//         var check_val = $.inArray($(this).attr('id'), active_priorities)
+//         if (check_val == -1) {
+//             active_priorities.push($(this).attr('id'))
+//         } else {
+//             active_priorities.splice(check_val, 1)
+//         }
 
-        if ($(this).has('i').length) {
-            var temp = $(this).text()
-            $(this).empty()
-            $(this).html(temp)
-        } else {
-            var temp = $(this).text()
-            $(this).html(temp + '<i class="fas fa-check"></i>')
-        }
+//         if ($(this).has('i').length) {
+//             var temp = $(this).text()
+//             $(this).empty()
+//             $(this).html(temp)
+//         } else {
+//             var temp = $(this).text()
+//             $(this).html(temp + '<i class="fas fa-check"></i>')
+//         }
 
-        filterTweets(active_categories, active_priorities, chronological, media_only)
-    });
+//         filterTweets(active_categories, active_priorities, chronological, media_only)
+//     });
 
-    $(document).on('click', '.order', function () {
-        var id = $(this).attr('id')
+//     $(document).on('click', '.order', function () {
+//         var id = $(this).attr('id')
 
-        if (id == 'chronological') {
-            chronological = true
-            var temp = $(this).text()
-            $(this).html(temp + '<i class="fas fa-circle fa-xs"></i>')
+//         if (id == 'chronological') {
+//             chronological = true
+//             var temp = $(this).text()
+//             $(this).html(temp + '<i class="fas fa-circle fa-xs"></i>')
 
-            if ($('#reverse-chronological').has('i').length) {
-                var temp = $('#reverse-chronological').text()
-                $('#reverse-chronological').empty()
-                $('#reverse-chronological').html(temp)  
-            }
-        } else {
-            chronological = false
-            var temp = $(this).text()
-            $(this).html(temp + '<i class="fas fa-circle fa-xs"></i>')
+//             if ($('#reverse-chronological').has('i').length) {
+//                 var temp = $('#reverse-chronological').text()
+//                 $('#reverse-chronological').empty()
+//                 $('#reverse-chronological').html(temp)  
+//             }
+//         } else {
+//             chronological = false
+//             var temp = $(this).text()
+//             $(this).html(temp + '<i class="fas fa-circle fa-xs"></i>')
 
-            if ($('#chronological').has('i').length) {
-                var temp = $('#chronological').text()
-                $('#chronological').empty()
-                $('#chronological').html(temp)  
-            }           
-        }
+//             if ($('#chronological').has('i').length) {
+//                 var temp = $('#chronological').text()
+//                 $('#chronological').empty()
+//                 $('#chronological').html(temp)  
+//             }           
+//         }
         
-        filterTweets(active_categories, active_priorities, chronological, media_only)
-    });
+//         filterTweets(active_categories, active_priorities, chronological, media_only)
+//     });
 
-    $(document).on('click', '.media-filter', function () {
-        var id = $(this).attr('id')
+//     $(document).on('click', '.media-filter', function () {
+//         var id = $(this).attr('id')
 
-        if (id == 'all-tweets') {
-            media_only = false
-            var temp = $(this).text()
-            $(this).html(temp + '<i class="fas fa-circle fa-xs"></i>')
+//         if (id == 'all-tweets') {
+//             media_only = false
+//             var temp = $(this).text()
+//             $(this).html(temp + '<i class="fas fa-circle fa-xs"></i>')
 
-            if ($('#media-only').has('i').length) {
-                var temp = $('#media-only').text()
-                $('#media-only').empty()
-                $('#media-only').html(temp)  
-            }
-        } else {
-            media_only = true
-            var temp = $(this).text()
-            $(this).html(temp + '<i class="fas fa-circle fa-xs"></i>')
+//             if ($('#media-only').has('i').length) {
+//                 var temp = $('#media-only').text()
+//                 $('#media-only').empty()
+//                 $('#media-only').html(temp)  
+//             }
+//         } else {
+//             media_only = true
+//             var temp = $(this).text()
+//             $(this).html(temp + '<i class="fas fa-circle fa-xs"></i>')
 
-            if ($('#all-tweets').has('i').length) {
-                var temp = $('#all-tweets').text()
-                $('#all-tweets').empty()
-                $('#all-tweets').html(temp)  
-            }           
-        }
+//             if ($('#all-tweets').has('i').length) {
+//                 var temp = $('#all-tweets').text()
+//                 $('#all-tweets').empty()
+//                 $('#all-tweets').html(temp)  
+//             }           
+//         }
         
-        filterTweets(active_categories, active_priorities, chronological, media_only)
-    });
+//         filterTweets(active_categories, active_priorities, chronological, media_only)
+//     });
 
-});
+// });
 
 $(window).on('load', function() {
     $('#refreshing-anim').hide();
     $('#tweet-grid').show();
 });
+
+$('#news_clicked').click(function(){
+
+    $('#tweets').addClass('hidden');
+    $('#news').removeClass("hidden");
+ 
+});
+
+$('#tweets_clciked').click(function(){
+
+    $('#news').addClass('hidden');
+    $('#tweets').removeClass("hidden");
+ 
+});
+
+

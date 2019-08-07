@@ -1,8 +1,9 @@
 import pymongo
+import datetime
 
 class MongoCollection:
 
-    def __init__(self, collectionname='func_test',databasename='Feedme',MongoURI="mongodb://localhost:27017/"):
+    def __init__(self, collectionname ,databasename='Feedme',MongoURI="mongodb://localhost:27017/"):
         """
         connect to cloud database default. chage to local,set:  MongoURI="mongodb://localhost:27017/"
         collections: Test;Train;Tweets; default:func_test to test
@@ -36,8 +37,10 @@ class MongoCollection:
         :param query: query for search
         :return: documents returned by query
         """
+        print("here", query)
+        print(self.collection)
         try:
-            self.collection.find(query)
+           return self.collection.find({"query" : str(query)})
         except Exception as e:
             print("Error", e)
 
@@ -47,7 +50,7 @@ class MongoCollection:
 
         :param collectionname: collection to change to
         """
-        if collectionname in ['Test',"Train","Training_token","TweetsData",'func_test']:
+        if collectionname in ['Test',"Train","Training_token","TweetsData",'queries']:
             self.collection=self.database[collectionname]
             return self
         else:
@@ -83,10 +86,61 @@ class MongoCollection:
         """
         try:
             myquery = { "query": query }
-            newvalues = { "$set": { "time_created": time } }
+            newvalues = { "$set": { "time_searched": time } }
             self.collection.update_many(myquery,newvalues)
         except Exception as e:
             print("Error", e)
+
+    def return_text_by_query(self,query):
+        """
+        Return all text about a query in collection.
+
+        :return: list of all data about a query
+        """
+
+        l=[]
+        all = self.find_all_queries(query)
+        for e in all:
+            l.append({"data":e["data"], "platform": e["platform"]})
+        return l
+    
+    def find_all_queries(self, query):
+        """
+        Find all documents in the collection 
+
+        :return: all documents
+        """
+        try:
+            x = self.collection.find({"query" : str(query)})
+        except Exception as e:
+            print("Error", e)
+        return x
+
+    def return_events_tracked(self):
+        """
+        Return all events/queries being tracked today in collection.
+
+        :return: list of all first query still being updated today
+        """
+
+        l=[]
+        all = self.find_all_events()
+        for e in all:
+            l.append({"query":e["query"], "time_searched": e["time_searched"]})
+        return l
+
+    def find_all_events(self):
+        """
+        Find all events from today in the collection 
+
+        :return: all events from today
+        """
+        try:
+            today= datetime.datetime.today()
+            x = self.collection.find({"time_searched" : {"$lt": today}})
+        except Exception as e:
+            print("Error", e)
+        return x
 
     class collectionException(Exception):
         print('your collection is not in our collection list, please read Readme.md to set correct collections')

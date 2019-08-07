@@ -39,7 +39,8 @@
 }
 
 #home-background {
-    background-image: url(../images/emergency.jpg);
+    background-color: white !important;
+    margin-top: -10% !important;
     background-size: cover;
     background-repeat: no-repeat;
     z-index: -1;
@@ -68,7 +69,9 @@
 }
 
 .search_input {
+    /* margin-top: 45% !important; */
     width: 100% !important;
+    /* border-radius: 25px; */
 }
 
 .numberCircle {
@@ -244,7 +247,7 @@ blockquote.twitter-tweet {
 	}
 
 .home_form{
-    max-width: 50%;
+    max-width: 100%;
     margin-left: 25%;
     margin-top: 20%;
 }
@@ -303,6 +306,77 @@ div#loading {
 }
 
 .main {
-    margin-left: 25%; /* Same as the width of the sidenav */
-    padding: 91px 20px 0px 20px;
+    /* margin-left: 25%; Same as the width of the sidenav */
+    padding: 30px 20px 0px 20px;
+}
+
+
+  
+  .home-form {
+    text-align: center;
+  }
+  
+  #form-search { 
+    width: 450px;
+    line-height: 32px;
+    padding: 20px 10px;
+  }
+  
+  .home-form #form-search {
+    padding: 0 8px;
+  }
+
+  .buttons {
+    text-align: center;
+    padding-top: 30px;
+    margin-left: 45% !important;
+    margin-bottom: 300px !important;
+  }
+
+  #tabs .nav_link {
+    color: black !important;
+  }
+
+.blogShort{ border-bottom:1px solid #ddd;}
+
+.nav-sidebar { 
+    width: 100%;
+    padding: 8px 0; 
+    border-right: 1px solid #ddd;
+}
+.nav-sidebar a {
+    color: #333;
+    -webkit-transition: all 0.08s linear;
+    -moz-transition: all 0.08s linear;
+    -o-transition: all 0.08s linear;
+    transition: all 0.08s linear;
+}
+.nav-sidebar .active a { 
+    cursor: default;
+    background-color: #34ca78; 
+    color: #fff; 
+}
+.nav-sidebar .active a:hover {
+    background-color: #37D980;   
+}
+.nav-sidebar .text-overflow a,
+.nav-sidebar .text-overflow .media-body {
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis; 
+}
+
+#news_img {
+    height: 200px !important;
+    width: 300px !important;
+}
+
+#home-logo{
+    margin-left: 45% !important;
+    margin-bottom: 2% !important;
+}
+
+#radio-div{
+    margin-left: 30% !important;
 }

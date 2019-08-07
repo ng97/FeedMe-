@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="text-center" id="loading">
+    <div id="inner-div-loading">
+        <div id="home-anim" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        <h4>Loading tweets...</h4>
+    </div>
+</div>
+
+
+<div id="home-background">
+    {% if no_tweets_found_error %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">No Tweets found!</h4>
+        <p>Can not find any relevant Tweets! Please use other keywords and try again.</p>
+    </div>
+    {% endif %}
+
+    {% if oembed_error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Got invalid response from Twitter API!</h4>
+        <p>Seems like something went wrong when trying to connect to the Twitter API for embedded HTML.</p>
+    </div>
+    {% endif %}
+
+    <div id="home-container" class="container">
+       
+                <img src="{{ url_for('static', filename = 'images/logo.png')}}" id="home-logo">
+                <div class="home-form">  
+                        <form class="form-group-row form-inline" action="/search" method="POST" name="theForm">
+                            <div class="col-sm-12">
+                                <label for="form-search"></label>
+                                <!-- <input type="text" id="form-search" placeholder="Search Feed Me"> -->
+                                <input type="text" id="query_input" name="query" class="form-control search_input" value="{{query}}" placeholder="Search Feed Me" width="100%"/>
+                            </div>
+                            <!-- <p style="color: white">Here</p> -->
+                            <div id="radio-div ">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="news" id="inlineCheckbox1" value="News API">
+                                    <label class="form-check-label" for="inlineCheckbox1">News API</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="twitter" type="checkbox" id="inlineCheckbox2" value="Twitter">
+                                    <label class="form-check-label" for="inlineCheckbox2">Twitter</label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-12">
+                                <label for="form-search"></label>
+                                <input type="submit" value=" Search" id="button_search">
+                            </div>
+                    
+                    </form>
+                </div>  
+            
+            
+           
+    </div>
+    <div>
+            <table>
+                <tbody>
+                    {% if events != None %}
+                        {%- for event in events %}
+                        <tr>
+                        {%- for column in range(3) %}
+                            <td>{{ event.query }}</td>
+                        {%- endfor %}
+                        </tr>
+                        {%- endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        <a href="#"></a>
+    </div>
+</div>
+
+{% endblock content %}

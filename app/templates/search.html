@@ -8,7 +8,7 @@
 </div> -->
 
 
-<nav id="nav" class="navbar fixed-top navbar-expand-lg navbar-dark">
+<!-- <nav id="nav" class="navbar fixed-top navbar-expand-lg navbar-primary">
 	 <div class="collapse navbar-collapse flex-md-column" id="navbarCollapse">
 	 	<div class="container-fluid">
 	        <div class="row">
@@ -20,7 +20,7 @@
 	            <div class="col-sm-10">
                     <form class="form-group-row form-inline" action="/search" method="POST" name="theForm">
                         <div class="col-sm-8">
-                            <input type="text" id="query_input" name="query" class="form-control search_input" value="{{query}}" placeholder="Search emergency" width="100%"/>
+                            <input type="text" id="query_input" name="query" class="form-control search_input" value="{{query}}" placeholder="Search Feed Me" width="100%"/>
                         </div>
                         <div class="col-sm-1">
                             <button class="btn btn-primary btn-lg" type="submit" id="load_button">
@@ -33,12 +33,232 @@
         	
         </div>
     </div>          
+ </nav> -->
+
+
+ <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="/home">
+        Feed Me
+    </a>
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" id="query_input" name="query" value="{{query}}" placeholder="Search Feed Me" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+   
  </nav>
 
-{% if tweets != '' %}
-<div class="container">
-    {{news}}
-</div>
-{% endif %}
+
+
+ <!-- <nav id="nav" class="navbar fixed-top navbar-expand-lg navbar-dark">
+        <div class="collapse navbar-collapse flex-md-column" id="navbarCollapse">
+            <div class="container-fluid">
+               <div class="row">
+                   <div class="col-sm-2">
+                       <a class="navbar-brand" href="/home">
+                           Feed Me
+                       </a>
+                   </div>
+                   
+                   <div id="row-filters" class="row justify-content-md-center">
+                        <div class="col-sm-2 text-center">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle btn-block btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                    Priority
+                                </button>
+                                <div class="filters dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a id="priority-low" class="dropdown-item filter" href="#">Low<i class="fas fa-check"></i></a>
+                                    <a id="priority-medium" class="dropdown-item filter" href="#">Medium<i class="fas fa-check"></i></a>
+                                    <a id="priority-high" class="dropdown-item filter" href="#">High<i class="fas fa-check"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle btn-block btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Media
+                                </button>
+                                <div class="filters dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a id="all-tweets" class="dropdown-item media-filter" href="#">All tweets<i class="fas fa-circle fa-xs"></i></a>
+                                    <a id="media-only" class="dropdown-item media-filter" href="#">Media only</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle btn-block btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Sort
+                                </button>
+                                <div id="orders" class="filters dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a id="chronological" class="dropdown-item order" href="#">Chronological<i class="fas fa-circle fa-xs"></i></a>
+                                    <a id="reverse-chronological" class="dropdown-item order" href="#">Reverse chronological</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+               </div>
+               
+           </div>
+       </div>          
+    </nav> -->
+
+    <!-- <div class="col-sm-10">
+            <form class="form-group-row form-inline" action="/search" method="POST" name="theForm">
+                <div class="col-sm-8">
+                    <input type="text" id="query_input" name="query" class="form-control search_input" value="{{query}}" placeholder="Search Feed Me" width="100%"/>
+                </div>
+               
+                <div class="col-sm-2">
+                    <button class="btn btn-primary" type="submit" id="load_button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div> -->
+
+<div>
+        <!-- <div class="sidenav">
+            <div id="card-categories" class="card">
+                <div class="card-header">
+                    Filters
+                </div>
+                <div class="card-body">
+                  
+                </div>
+            </div>
+        </div> -->
+        <div class="main">
+            <!-- <div class="text-center" id="refreshing-anim">
+                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                <h4>Loading..</h4>
+            </div> -->
+            <div id="tweet-grid">
+                {{tweets|safe}}
+            </div>
+            <!-- <div>
+                {{news}}
+            </div> -->
+            <div class="row">
+                <div class="col-sm-2 paddingTop20">
+                   
+                    <div class="card" style="width: inherit;">
+                            <div class="card-header">
+                                   <h4>Filters</h4>
+                                     
+                            </div>
+                            <div class="card-body">
+                              
+                            </div>
+                          </div>                          
+                </div>
+
+
+
+                <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                  </div> -->
+
+
+
+
+                <div class="col-md-10 ">
+                        <div class="card text-center">
+                                <div class="card-header">
+                                  <!-- <ul id="tabs" class="nav nav-tabs card-header-tabs" data-tabs="tabs">
+                                        <li class="active nav-item"><a class="nav-link" href="#red" data-toggle="tab">News</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#orange" data-toggle="tab">Tweets</a></li>
+                                        
+                                    </ul> -->
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">News</a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tweets</a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a class="nav-link" id="google-tab" data-toggle="tab" href="#google" role="tab" aria-controls="google" aria-selected="false">Google</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                                <div class="card-body" >
+
+
+                                                <div class="tab-content" id="myTabContent">
+                                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                                                    <ul class="list-unstyled">
+                                                       
+                                                        {% for i in news %}
+                                                           <li class="media" style="text-align:left;">
+                                                                <img src="{{i.urlToImage}}" class="mr-3" id="news_img" alt="News Image">
+                                                                <div class="media-body">
+                                                                  <h5 class="mt-0 mb-1"><a target="_blank" href="{{i.url}}">{{i.title}}</a></h5>
+                                                                  <blockquote class="blockquote">
+                                                                          <p class="mb-0">{{i.description}}</p>
+                                                                          {% if i.author == null %}
+                                                                            <footer class="blockquote-footer">Anonymous in <cite title="Source Title">{{i.source.name}}</cite></footer>
+                                                                          {% endif %}
+                                                                          {% if i.author != null %}
+                                                                            <footer class="blockquote-footer">{{i.author}} in <cite title="Source Title">{{i.source.name}}</cite></footer>
+                                                                          {% endif %}
+                                                                        </blockquote>
+                                                                </div>
+                                                            </li>
+                                                            <br>
+                                                        {% endfor %} 
+                                                    </ul>
+
+                                                    </div>
+                                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                        
+                                                        {% for tweet in tweets%}
+
+                                                            {{tweet | safe}}
+
+                                                        {% endfor %}
+                                                    
+                                                    
+                                                    </div>
+                                                    <div class="tab-pane fade" id="google" role="tabpanel" aria-labelledby="google-tab">
+                                                        
+                                                        {% for data in google%}
+
+                                                            {{data}}
+
+                                                        {% endfor %}
+                                                    
+                                                    
+                                                    </div>
+                                                    
+                                                </div>
+
+                                               
+                                </div>
+                        </div>
+                                
+                    </div>
+                </div>
+            </div>
+            <!-- main body -->
+           
+
+
+        </div>
+    </div>
 
 {% endblock content %}
