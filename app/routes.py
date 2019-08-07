@@ -24,7 +24,7 @@ def search():
     #connection to db
     connect = MongoCollection(collectionname='queries', MongoURI="mongodb://localhost:27017/")
     # Get form inputs.
-    apis= []
+    # apis= []
     query= request.form['query']
     # twitter= request.form['twitter']
     # news_check= request.form['news']
@@ -48,8 +48,8 @@ def search():
             # all_tweets= searchapi.search_TwitterAPI(query)
         # elif (twitter == '' and news_check == ''):
             # news_data = searchapi.search_NewsAPI(query)
-            google_data = searchapi.search_GoogleAPI(query)
-            # all_tweets= searchapi.search_TwitterAPI(query)
+            # google_data = searchapi.search_GoogleAPI(query)
+            all_tweets= searchapi.search_TwitterAPI(query)
             # all_data= dp.get_query_suggestions(query)
         
         
@@ -77,9 +77,9 @@ def search():
     # return render_template('search.html', news=news_data, data= all_data, tweets=html, query= query)
     # print(all_tweets['html'])
     # return render_template('search.html', news="No Data Found")
-    # return render_template('search.html', tweets=all_tweets, query= query)
+    return render_template('search.html', tweets=all_tweets, query= query)
     # return render_template('search.html', news=news_data, query= query)
-    return render_template('search.html', google=google_data, query= query)
+    # return render_template('search.html', google=google_data, query= query)
 
 # Add HTML of tweets to a grid with pagination.
 def beautify_html(tweets):
